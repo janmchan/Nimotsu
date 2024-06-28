@@ -1,10 +1,12 @@
 import NimotsuList from './Components/NimotsuList';
-
-
+import "./App.css";
 function App() {
     
     return (
-        <NimotsuList />
+        <div className="container mx-auto p-4">
+            <h1 id="tableLabel" className="text-4xl mb-6">Your Nimotsu!</h1>
+            <NimotsuList />
+        </div>
     );
 
 }
