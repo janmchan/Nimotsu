@@ -1,8 +1,9 @@
+@import 'https://unpkg.com/normalize.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 /* Optional: Normalize CSS */
-@import 'https://unpkg.com/normalize.css';
+
 
 /* Base styles */
 body {
