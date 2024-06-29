@@ -1,6 +1,5 @@
 import store, { NimotsuContainer } from './Store';
 import { observer } from 'mobx-react';
-import NimotsuAdd from './NimotsuAdd';
 function NimotsuListItems() {
     const contents =
 
@@ -30,12 +29,15 @@ function NimotsuListItems() {
                             {nimotsuContainer.icon}
                         </th>
                         <td className="px-6 py-4">
-                            {nimotsuContainer.color}
+                                <div style={{ width: "25px", height: "25px", backgroundColor: nimotsuContainer.color } }></div>
                         </td>
                         <td className="px-6 py-4">
                             {nimotsuContainer.name}
                         </td>
-                        <td className="px-6 py-4">
+                            <td className="px-6 py-4">
+                                <button
+                                    className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                                    onClick={() => store.loadNimotsuContainer(nimotsuContainer.id)}>Edit</button>
                                 <button
                                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                                     onClick={() => store.removeNimotsuContainer(nimotsuContainer.id)}>Delete</button>
@@ -47,7 +49,6 @@ function NimotsuListItems() {
         </div>;
     return (
         <>
-            <NimotsuAdd />
             <div className="p-4 border border-gray-300 rounded-md shadow-sm">
                 {contents}
             </div>
