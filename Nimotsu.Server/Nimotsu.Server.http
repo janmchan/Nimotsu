@@ -1,6 +1,6 @@
 @Nimotsu.Server_HostAddress = http://localhost:5155
 
-GET {{Nimotsu.Server_HostAddress}}/weatherforecast/
+GET {{Nimotsu.Server_HostAddress}}/luggage/
 Accept: application/json
 
 ###

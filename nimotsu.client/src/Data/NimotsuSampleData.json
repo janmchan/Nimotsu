@@ -3,22 +3,13 @@
     "id": 1,
     "icon": "🧳",
     "name": "Child Luggage",
-    "image": "/sample/image/path.jpg",
     "color": "blue",
     "contents": [
       {
-        "icon": "🧸",
-        "name": "Bear",
-        "image": "/sample/image/path.jpg",
-        "color": "brpwn",
-        "contents": []
+        "name": "Bear"
       },
       {
-        "icon": "👕",
-        "name": "Shirt",
-        "image": "/sample/image/path.jpg",
-        "color": "purple",
-        "contents": []
+        "name": "Shirt"
       }
     ]
   },
@@ -26,22 +17,13 @@
     "id": 2,
     "icon": "👜",
     "name": "Lady Bag",
-    "image": "/sample/image/path.jpg",
     "color": "red",
     "contents": [
       {
-        "icon": "💄",
-        "name": "Make Up",
-        "image": "/sample/image/path.jpg",
-        "color": "purple",
-        "contents": []
+        "name": "Make Up"
       },
       {
-        "icon": "🍷",
-        "name": "Water",
-        "image": "/sample/image/path.jpg",
-        "color": "blue",
-        "contents": []
+        "name": "Water"
       }
     ]
   }

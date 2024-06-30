@@ -1,7 +1,9 @@
 ﻿import { observer } from 'mobx-react';
-import store from './Store';
+import { useState } from 'react';
+import NimotsuStore from './NimotsuStore';
 
 function NimotsuListAdd() {
+    const [store] = useState(NimotsuStore);
     return (
         <div className="container mx-auto mb-8 p-4 border border-gray-300 rounded-md shadow-sm">
             <div className="mb-5">
@@ -14,11 +16,6 @@ function NimotsuListAdd() {
                     className="max-w-xs"
                     onChange={(evt) => (store.newNimotsuContainer.color = evt.target.value)}
                 />
-                <select onChange={(evt) => (store.newNimotsuContainer.icon = evt.target.value)}>
-                    {store.icons.map((icon) =>
-                        <option selected={store.newNimotsuContainer.icon === icon ? true : false} value={icon}>{icon}</option>
-                    )}
-                </select>
                 <input className="w-500"
                 placeholder="Name"
                 value={store.newNimotsuContainer.name}
@@ -26,7 +23,7 @@ function NimotsuListAdd() {
                 />
             </div>
             
-            <button onClick={() => store.addNimotsuContainer()}>{store.isNew ? "Add" : "Edit"} Nimotsu</button>
+            <button onClick={() => store.isNew ? store.addNimotsuContainer() : store.updateNimotsuContainer()}>{store.isNew ? "Add" : "Edit"} Nimotsu</button>
         </div>
     );
 }

@@ -1,12 +1,10 @@
 ﻿import { makeAutoObservable } from "mobx";
+import { useEffect } from 'react';
+import NimotsuContainer from './NimotsuContainer';
+import { v4 as uuidv4 } from 'uuid';
+import NimotsuApi from './NimotsuApi';
 
-export interface NimotsuContainer {
-    id: number;
-    icon: string;
-    name: string;
-    color: string;
-}
-const findNimotsuContainer = (nimotsuContainers: NimotsuContainer[], id: number): number => {
+const findNimotsuContainer = (nimotsuContainers: NimotsuContainer[], id: string): number => {
     const index = nimotsuContainers.findIndex((n) => n.id === id);
     return index;
 }
@@ -18,59 +16,52 @@ const updateNimotsuContainer = (nimotsuContainers: NimotsuContainer[], container
     return nimotsuContainers;
 }
 const addNimotsuContainerFunc = (nimotsuContainers: NimotsuContainer[], nimotsu: NimotsuContainer): NimotsuContainer[] => {
-    nimotsu.id = Math.random();
+    nimotsu.id = uuidv4();
     nimotsuContainers.push(nimotsu)
     return nimotsuContainers;
 }
 
-const removeNimotsuContainerFunc = (nimotsuContainers: NimotsuContainer[], id: number) => {
+const removeNimotsuContainerFunc = (nimotsuContainers: NimotsuContainer[], id: string) => {
     return nimotsuContainers.filter(x => {
         return x.id != id;
     });
 }
 const emptyNimotsuContainer = {
-    id: Math.random(),
+    id: uuidv4(),
     name: "",
     icon: "🧳",
-    color: "rgb(153,0,255)"
+    color: "#0000ff"
 }
-class Store {
+class NimotsuStore {
     nimotsuContainers: NimotsuContainer[] = [];
-    icons: string[] = ["🧳", "👜", "💼"];
     newNimotsuContainer: NimotsuContainer = emptyNimotsuContainer;
     isNew: boolean = true;
     constructor() {
-        this.nimotsuContainers.push({
-            id: Math.random(),
-            name: "Child Luggage",
-            icon: "👜",
-            color: "blue"
-        });
         makeAutoObservable(this);
     }
 
-    loadNimotsuContainer(id: number) {
+    loadNimotsuContainer(id: string) {
         const containerId = findNimotsuContainer(this.nimotsuContainers, id);
         this.newNimotsuContainer = this.nimotsuContainers[containerId];
         this.isNew = false;
     }
-
-    addNimotsuContainer() {
+    updateNimotsuContainer() {
         const existingContainer = findNimotsuContainer(this.nimotsuContainers, this.newNimotsuContainer.id);
         if (existingContainer !== -1) {
             this.nimotsuContainers = updateNimotsuContainer(this.nimotsuContainers, this.newNimotsuContainer);
-        } else {
-            this.nimotsuContainers = addNimotsuContainerFunc(this.nimotsuContainers, this.newNimotsuContainer);
         }
-        emptyNimotsuContainer.id = Math.random();
+    }
+    addNimotsuContainer() {
+        this.nimotsuContainers = addNimotsuContainerFunc(this.nimotsuContainers, this.newNimotsuContainer);
+        emptyNimotsuContainer.id = uuidv4();
         this.newNimotsuContainer = emptyNimotsuContainer;
         this.isNew = true;
     }
 
-    removeNimotsuContainer(id: number) {
+    removeNimotsuContainer(id: string) {
         this.nimotsuContainers = removeNimotsuContainerFunc(this.nimotsuContainers, id);
     }
 
 }
-const store = new Store();
+const store = new NimotsuStore();
 export default store;

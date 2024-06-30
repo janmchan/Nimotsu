@@ -1,4 +1,4 @@
-import NimotsuListItems from './Components/NimotsuListItems';
+import NimotsuListItems from './Components/NimotsuPage';
 import "./App.css";
 function App() {
     
