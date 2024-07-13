@@ -1,8 +1,6 @@
 ﻿import { makeAutoObservable } from "mobx";
-import { useEffect } from 'react';
 import NimotsuContainer from './NimotsuContainer';
 import { v4 as uuidv4 } from 'uuid';
-import NimotsuApi from './NimotsuApi';
 
 const findNimotsuContainer = (nimotsuContainers: NimotsuContainer[], id: string): number => {
     const index = nimotsuContainers.findIndex((n) => n.id === id);

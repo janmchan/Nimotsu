@@ -24,6 +24,17 @@
                     Name = "Water Bottle"
                 }
             }
+        }, new Nimotsu {
+            Name = "Business Man",
+            Color = "#0000ff",
+            Contents = new [] {
+                new Nimotsu {
+                    Name = "Laptop"
+                },
+                new Nimotsu {
+                    Name = "Controller"
+                }
+            }
         }];
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Name { get; set; }

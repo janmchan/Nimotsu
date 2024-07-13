@@ -30,11 +30,6 @@ namespace Nimotsu.Server
 
             app.UseAuthorization();
 
-            var summaries = new[]
-            {
-                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-            };
-
             app.MapGet("/luggage", (HttpContext httpContext) =>
             {
                 return Nimotsu.Defaults;
