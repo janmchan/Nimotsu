@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace Nimotsu.Server
 {
     public class Program
@@ -13,6 +15,7 @@ namespace Nimotsu.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<MongoDBService>();
 
             var app = builder.Build();
 
@@ -30,11 +33,25 @@ namespace Nimotsu.Server
 
             app.UseAuthorization();
 
-            app.MapGet("/luggage", (HttpContext httpContext) =>
+            app.MapGet("/luggage", async (HttpContext httpContext, MongoDBService mongoDBService) =>
             {
-                return Nimotsu.Defaults;
+                return await mongoDBService.GetAllAsync();
             })
             .WithName("GetLuggage")
+            .WithOpenApi();
+
+            app.MapGet("/luggage/{luggageId}", async (string luggageId, HttpContext httpContext, MongoDBService mongoDBService) =>
+            {
+                return await mongoDBService.GetByIdAsync(luggageId);
+            })
+            .WithName("GetLuggageById")
+            .WithOpenApi();
+            app.MapPost("/luggage", async ([FromBody]Nimotsu luggage, MongoDBService mongoDBService) =>
+            {
+                await mongoDBService.CreateAsync(luggage);
+                return Results.Created($"/luggage/{luggage.Id}", luggage);
+            })
+            .WithName("CreateLuggage")
             .WithOpenApi();
 
             app.MapFallbackToFile("/index.html");
